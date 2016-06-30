@@ -6,7 +6,8 @@ import invariant from 'invariant'
 export default class ContainerDimensions extends Component {
 
     static propTypes = {
-        children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
+        children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
+        renderChildBeforeInit: PropTypes.bool
     }
 
     constructor() {
@@ -40,7 +41,7 @@ export default class ContainerDimensions extends Component {
     render() {
         invariant(this.props.children, 'Expected children to be one of function or React.Element')
 
-        if (!this.state.initiated) {
+        if (!this.state.initiated && !this.props.renderChildBeforeInit) {
             return <div />
         }
         if (typeof this.props.children === 'function') {

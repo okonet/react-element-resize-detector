@@ -27,6 +27,14 @@ visualization needs to be updated in order to fit into container.
 </ContainerDimensions>    
 ```
 
+* Use the `renderChildBeforeInit` to make the child rendered before initialize (for isomophic project and SEO purpose). The default behavior is rendering an empty `div` before initialize.
+
+```jsx
+<ContainerDimensions renderChildBeforeInit={true}>
+    <MyComponent/>
+</ContainerDimensions>    
+```
+
 ## How is it different from ...
 
 *It does not create a new element in the DOM but relies on the `parentNode` which must be present.* 

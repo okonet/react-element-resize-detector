@@ -68,7 +68,7 @@ describe('react-container-dimensions', () => {
         }, 0)
     })
 
-    it('should initially render an empty placeholder', () => {
+    it('should initially render an empty placeholder by default', () => {
         const wrapper = mount(
             <ContainerDimensions>
                 <MyComponent />
@@ -87,6 +87,20 @@ describe('react-container-dimensions', () => {
         })
 
         expect(wrapper.find(MyComponent).length).to.eq(1)
+    })
+
+    it('should initially render the children when renderChildBeforeInit toggle is on', () => {
+        const wrapper = mount(
+            <ContainerDimensions renderChildBeforeInit={true}>
+                <MyComponent />
+            </ContainerDimensions>
+        )
+        wrapper.setState({
+            initiated: false
+        })
+
+        expect(wrapper.find(MyComponent)).to.have.length(1)
+        expect(wrapper.find(MyComponent)).to.have.prop('initiated', false)
     })
 
     it('should pass width and height as props to its children', () => {
@@ -148,6 +162,6 @@ describe('react-container-dimensions', () => {
             ' class="erd_scroll_detection_container' +
             ' erd_scroll_detection_container_animation_active" style="visibility: hidden;' +
             ' display: inline; width: 0px; height: 0px; z-index: -1; overflow:' +
-            ' hidden;"></div></h1>')
+            ' hidden; margin: 0px; padding: 0px;"></div></h1>')
     })
 })
