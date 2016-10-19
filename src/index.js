@@ -26,19 +26,23 @@ export default class ContainerDimensions extends Component {
         this.parentNode = ReactDOM.findDOMNode(this).parentNode
         this.elementResizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' })
         this.elementResizeDetector.listenTo(this.parentNode, this.onResize)
+        this._isMounted = true
         this.onResize()
     }
 
     componentWillUnmount() {
+        this._isMounted = false
         this.elementResizeDetector.removeListener(this.parentNode, this.onResize)
     }
 
     onResize() {
         const clientRect = ContainerDimensions.getDomNodeDimensions(this.parentNode)
-        this.setState({
-            initiated: true,
-            ...clientRect
-        })
+        if (this._isMounted) {
+            this.setState({
+                initiated: true,
+                ...clientRect
+            })
+        }
     }
 
     render() {
