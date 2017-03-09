@@ -24,7 +24,10 @@ export default class ContainerDimensions extends Component {
 
     componentDidMount() {
         this.parentNode = ReactDOM.findDOMNode(this).parentNode
-        this.elementResizeDetector = elementResizeDetectorMaker({ strategy: 'scroll' })
+        this.elementResizeDetector = elementResizeDetectorMaker({
+            strategy: 'scroll',
+            callOnAdd: false
+        })
         this.elementResizeDetector.listenTo(this.parentNode, this.onResize)
         this.onResize()
     }

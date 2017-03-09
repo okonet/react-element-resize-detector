@@ -1,6 +1,6 @@
 const jsdom = require('jsdom').jsdom
 
-global.document = jsdom('<!doctype html><html><body></body></html>')
+global.document = jsdom('<!doctype html><html><body><div id="root"></div></body></html>')
 global.window = document.defaultView
 
 Object.keys(document.defaultView).forEach((property) => {
