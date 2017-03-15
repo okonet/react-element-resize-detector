@@ -79,7 +79,7 @@
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1",
     "rimraf": "^2.5.3",
-    "sinon": "^1.17.7",
+    "sinon": "^2.0.0",
     "semantic-release": "^6.3.2"
   }
 }
