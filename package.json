@@ -52,7 +52,8 @@
   "homepage": "https://github.com/okonet/react-container-dimensions#readme",
   "dependencies": {
     "element-resize-detector": "^1.1.10",
-    "invariant": "^2.2.2"
+    "invariant": "^2.2.2",
+    "prop-types": "^15.5.8"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
@@ -79,7 +80,7 @@
     "react-addons-test-utils": "^15.4.1",
     "react-dom": "^15.4.1",
     "rimraf": "^2.5.3",
-    "sinon": "^1.17.7",
-    "semantic-release": "^6.3.2"
+    "semantic-release": "^6.3.2",
+    "sinon": "^1.17.7"
   }
 }
