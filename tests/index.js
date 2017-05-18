@@ -3,9 +3,10 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { spy, stub } from 'sinon'
 import chai, { expect } from 'chai'
+import chaiEnzyme from 'chai-enzyme'
 import ContainerDimensions from '../src/index'
 
-chai.use(require('chai-enzyme')())
+chai.use(chaiEnzyme())
 const MyComponent = ({ width, height }) => <span>{width}, {height}</span> // eslint-disable-line
 
 describe('react-container-dimensions', () => {
@@ -52,7 +53,7 @@ describe('react-container-dimensions', () => {
   xit('calls onResize when parent has been resized', (done) => {
     spy(ContainerDimensions.prototype, 'onResize')
     const wrapper = mount(
-      <div ref="node" id="node" style={{ width: 10 }}>
+      <div id="node" style={{ width: 10 }}>
         <ContainerDimensions>
           <MyComponent />
         </ContainerDimensions>
@@ -193,5 +194,20 @@ describe('react-container-dimensions', () => {
       </h1>
     )
     expect(wrapper.html()).to.contain('<h1><span width="0" height="0">Test</span>')
+  })
+
+  it('should call onResize on every frame when updateOnOffsetChange is true', () => {
+    spy(window, 'requestAnimationFrame')
+
+    const wrapper = mount(
+      <ContainerDimensions updateOnOffsetChange>
+        <MyComponent />
+      </ContainerDimensions>
+    )
+
+    expect(window.requestAnimationFrame.called).to.be.true
+    expect(window.requestAnimationFrame.args[0][0]).to.equal(wrapper.get(0).onResize)
+
+    window.requestAnimationFrame.restore()
   })
 })
