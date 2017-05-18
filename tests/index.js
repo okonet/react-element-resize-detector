@@ -210,4 +210,30 @@ describe('react-container-dimensions', () => {
 
     window.requestAnimationFrame.restore()
   })
+
+  it('should only update state when the bounding rect has changed', () => {
+    const wrapper = mount(
+      <ContainerDimensions>
+        <MyComponent />
+      </ContainerDimensions>
+      , { attachTo: document.getElementById('root') })
+
+    const el = wrapper.get(0)
+    spy(el, 'setState')
+
+    el.onResize()
+    expect(el.setState.called).to.be.false
+
+    const newRect = { top: 10, right: 0, bottom: 0, left: 0, width: 0, height: 0 }
+    stub(ContainerDimensions, 'getDomNodeDimensions').callsFake(() => newRect)
+
+    el.onResize()
+    expect(el.setState.called).to.be.true
+    expect(el.setState.args[0][0]).to.deep.equal({
+      ...newRect,
+      initiated: true
+    })
+
+    ContainerDimensions.getDomNodeDimensions.restore()
+  })
 })
