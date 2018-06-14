@@ -30,19 +30,23 @@ export default class ContainerDimensions extends Component {
       callOnAdd: false
     })
     this.elementResizeDetector.listenTo(this.parentNode, this.onResize)
+    this._isMounted = true
     this.onResize()
   }
 
   componentWillUnmount() {
+    this._isMounted = false
     this.elementResizeDetector.uninstall(this.parentNode)
   }
 
   onResize() {
     const clientRect = ContainerDimensions.getDomNodeDimensions(this.parentNode)
-    this.setState({
-      initiated: true,
-      ...clientRect
-    })
+    if (this._isMounted) {
+      this.setState({
+        initiated: true,
+        ...clientRect
+      })
+    }
   }
 
   render() {
