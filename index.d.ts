@@ -1,18 +1,22 @@
 import * as React from 'react';
   
 export interface Dimensions {
-    height: number;
-    width: number;
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+  width: number;
+  height: number;
 }
 
 export interface ContainerDimensionsProps {
-    /**
-     * Can either be a function that's responsible for rendering children.
-     * This function should implement the following signature:
-     * ({ height, width }) => PropTypes.element
-     * Or a React element, with width and height injected into its props.
-     */
-    children: ((props: Dimensions) => React.ReactNode) | React.ReactNode;
+  /**
+   * Can either be a function that's responsible for rendering children.
+   * This function should implement the following signature:
+   * ({ height, width }) => PropTypes.element
+   * Or a React element, with width and height injected into its props.
+   */
+  children: ((props: Dimensions) => React.ReactNode) | React.ReactNode;
 }
 
 /**
