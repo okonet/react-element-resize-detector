@@ -27,9 +27,6 @@
     "type": "git",
     "url": "https://github.com/okonet/react-container-dimensions.git"
   },
-  "files": [
-    "lib"
-  ],
   "directories": {
     "lib": "lib"
   },
