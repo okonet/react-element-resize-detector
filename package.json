@@ -71,7 +71,7 @@
     "enzyme": "^2.7.1",
     "eslint": "^3.11.0",
     "eslint-config-okonet": "^1.2.3",
-    "jsdom": "^9.11.0",
+    "jsdom": "^12.1.0",
     "lint-staged": "^4.0.0",
     "mocha": "^3.2.0",
     "npm-check": "^5.2.2",
