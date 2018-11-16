@@ -55,10 +55,11 @@ export default class ContainerDimensions extends Component {
     if (!this.state.initiated) {
       return <div />
     }
+    const { initiated, ...clientRect } = this.props;
     if (typeof this.props.children === 'function') {
-      const renderedChildren = this.props.children(this.state)
+      const renderedChildren = this.props.children(clientRect)
       return renderedChildren && Children.only(renderedChildren)
     }
-    return Children.only(React.cloneElement(this.props.children, this.state))
+    return Children.only(React.cloneElement(this.props.children, clientRect))
   }
 }
