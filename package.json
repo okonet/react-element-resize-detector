@@ -83,6 +83,6 @@
     "react-dom": "^15.4.1",
     "rimraf": "^2.5.3",
     "semantic-release": "^6.3.2",
-    "sinon": "^2.2.0"
+    "sinon": "^3.0.0"
   }
 }
