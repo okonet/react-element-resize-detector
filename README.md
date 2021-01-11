@@ -90,6 +90,14 @@ export const myVis = () => (
 )
 ```
 
+### Options
+
+The following options are available
+
+* `debounceTime`: Indicates in milliseconds how long to wait until to fire the onResize event. 
+  e.g. `<ContainerDimensions debounceTime={200}>...</ContainerDimensions>` debounces the onResize
+  event for `200ms`
+
 ## Other similar projects:
 
 * https://github.com/digidem/react-dimensions

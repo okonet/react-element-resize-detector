@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import elementResizeDetectorMaker from 'element-resize-detector'
 import invariant from 'invariant'
+import lodash from 'lodash'
 
 export default class ContainerDimensions extends Component {
 
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
+    debounceTime: PropTypes.number
   }
 
   static getDomNodeDimensions(node) {
@@ -15,12 +17,15 @@ export default class ContainerDimensions extends Component {
     return { top, right, bottom, left, width, height }
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       initiated: false
     }
     this.onResize = this.onResize.bind(this)
+    if (props.debounceTime !== undefined) {
+      this.onResizeDebounced = lodash.debounce(this.onResize, props.debounceTime)
+    }
   }
 
   componentDidMount() {
@@ -29,7 +34,11 @@ export default class ContainerDimensions extends Component {
       strategy: 'scroll',
       callOnAdd: false
     })
-    this.elementResizeDetector.listenTo(this.parentNode, this.onResize)
+    if (this.props.debounceTime !== undefined) {
+      this.elementResizeDetector.listenTo(this.parentNode, this.onResizeDebounced)
+    } else {
+      this.elementResizeDetector.listenTo(this.parentNode, this.onResize)
+    }
     this.componentIsMounted = true
     this.onResize()
   }
